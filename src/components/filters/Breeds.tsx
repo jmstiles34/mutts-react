@@ -1,50 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import getBreeds from "../../api/getBreeds";
 
 type BreedsProps = {
-    selectedBreeds: Set<string>;
-    setSelectedBreeds: (selectedBreeds: Set<string>) => void;
+  selectedBreeds: Set<string>;
+  setSelectedBreeds: (selectedBreeds: Set<string>) => void;
 };
 
 const Breeds: React.FC<BreedsProps> = ({
   selectedBreeds,
   setSelectedBreeds,
 }) => {
-  const [breeds, setBreeds] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBreeds, setFilteredBreeds] = useState<string[]>([]);
+
+  const { data: breeds } = useQuery({
+    queryKey: ["dog-breeds"],
+    queryFn: () => getBreeds(),
+  });
 
   useEffect(() => {
     if (searchTerm) {
       setFilteredBreeds(
-        breeds.filter((breed) =>
+        breeds.filter((breed: string) =>
           breed.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
     } else {
-      setFilteredBreeds(breeds);
+      if (breeds) setFilteredBreeds(breeds);
     }
   }, [searchTerm, breeds]);
-
-  useEffect(() => {
-    const fetchBreeds = async () => {
-      try {
-        const response = await fetch("/api/dogs/breeds", {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        setBreeds(data);
-        setFilteredBreeds(data);
-      } catch (error) {
-        console.error("Error fetching breeds data:", error);
-      }
-    };
-
-    fetchBreeds();
-  }, []);
 
   const toggleBreed = (breed: string) => {
     const updatedSelectedBreeds = new Set(selectedBreeds);
