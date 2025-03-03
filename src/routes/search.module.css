@@ -1,0 +1,112 @@
+.dogsContainer {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  height: calc(100vh - 100px);
+}
+
+.searchButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-burgundy);
+  color: var(--color-white);
+  border-radius: 4px;
+  text-align: center;
+
+  &:hover {
+    background-color: var(--color-green);
+  }
+}
+.resetButton {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-secondary-bg);
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 1rem;
+
+  &:hover {
+    color: var(--color-white);
+    background-color: var(--color-green);
+  }
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border);
+  padding: 1rem;
+  overflow-y: auto;
+  gap: 1rem;
+}
+
+.searchResults {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 1rem;
+}
+
+.tabs {
+  display: flex;
+  margin: 1rem;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--color-brown-700);
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background-color: var(--color-secondary-bg);
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  transition: background-color 0.3s ease;
+  width: fit-content
+}
+
+.tabs button.active {
+  background-color: var(--color-brown-500);
+  color: var(--color-white);
+}
+
+.tabs button:hover {
+  background-color: var(--color-burgundy);
+  color: var(--color-white);
+}
+
+.paginationInfo {
+  display: flex;
+  color: var(--color-black);
+  font-size: var(--h5);
+  margin: 0 1.5rem;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.dogsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 0.5rem 1.5rem;
+}
+
+.error {
+  color: var(--color-red-500);
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.loading {
+  text-align: center;
+  color: #6c757d;
+  margin: 2rem 0;
+}
+
+.sortByWrapper {
+  color: var(--color-black);
+  font-size: var(--h5);
+}
+
+.sortBySelect {
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0 8px;
+}
